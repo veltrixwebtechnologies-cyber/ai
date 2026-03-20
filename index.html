@@ -1,475 +1,764 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "background": "#f9f9f9",
-              "error": "#ba1a1a",
-              "on-secondary-fixed-variant": "#3b3b3b",
-              "outline": "#777777",
-              "on-primary-container": "#ffffff",
-              "on-background": "#1a1c1c",
-              "secondary": "#5f5e5e",
-              "on-surface": "#1a1c1c",
-              "secondary-fixed": "#c8c6c6",
-              "primary": "#000000",
-              "primary-fixed": "#5e5e5e",
-              "on-tertiary": "#e2e2e2",
-              "tertiary-fixed": "#5e5e5e",
-              "secondary-fixed-dim": "#acabab",
-              "primary-fixed-dim": "#474747",
-              "error-container": "#ffdad6",
-              "surface-bright": "#f9f9f9",
-              "surface-container-highest": "#e2e2e2",
-              "on-primary-fixed-variant": "#e2e2e2",
-              "surface-dim": "#dadada",
-              "on-error": "#ffffff",
-              "surface-variant": "#e2e2e2",
-              "on-tertiary-fixed": "#ffffff",
-              "on-surface-variant": "#474747",
-              "on-primary": "#e2e2e2",
-              "inverse-primary": "#c6c6c6",
-              "tertiary-container": "#747474",
-              "surface-container": "#eeeeee",
-              "secondary-container": "#d6d4d3",
-              "surface-container-low": "#f3f3f3",
-              "on-secondary-container": "#1b1c1c",
-              "surface-container-lowest": "#ffffff",
-              "primary-container": "#3b3b3b",
-              "outline-variant": "#c6c6c6",
-              "on-primary-fixed": "#ffffff",
-              "on-secondary": "#ffffff",
-              "on-error-container": "#410002",
-              "on-tertiary-fixed-variant": "#e2e2e2",
-              "inverse-surface": "#2f3131",
-              "inverse-on-surface": "#f1f1f1",
-              "surface-container-high": "#e8e8e8",
-              "on-secondary-fixed": "#1b1c1c",
-              "surface-tint": "#5e5e5e",
-              "tertiary-fixed-dim": "#474747",
-              "on-tertiary-container": "#ffffff",
-              "tertiary": "#3b3b3b",
-              "surface": "#f9f9f9"
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#f9f9f9",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#3b3b3b",
+                        "outline": "#777777",
+                        "on-primary-container": "#ffffff",
+                        "on-background": "#1a1c1c",
+                        "secondary": "#5f5e5e",
+                        "on-surface": "#1a1c1c",
+                        "secondary-fixed": "#c8c6c6",
+                        "primary": "#000000",
+                        "primary-fixed": "#5e5e5e",
+                        "on-tertiary": "#e2e2e2",
+                        "tertiary-fixed": "#5e5e5e",
+                        "secondary-fixed-dim": "#acabab",
+                        "primary-fixed-dim": "#474747",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#f9f9f9",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-primary-fixed-variant": "#e2e2e2",
+                        "surface-dim": "#dadada",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "on-tertiary-fixed": "#ffffff",
+                        "on-surface-variant": "#474747",
+                        "on-primary": "#e2e2e2",
+                        "inverse-primary": "#c6c6c6",
+                        "tertiary-container": "#747474",
+                        "surface-container": "#eeeeee",
+                        "secondary-container": "#d6d4d3",
+                        "surface-container-low": "#f3f3f3",
+                        "on-secondary-container": "#1b1c1c",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#3b3b3b",
+                        "outline-variant": "#c6c6c6",
+                        "on-primary-fixed": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#410002",
+                        "on-tertiary-fixed-variant": "#e2e2e2",
+                        "inverse-surface": "#2f3131",
+                        "inverse-on-surface": "#f1f1f1",
+                        "surface-container-high": "#e8e8e8",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "surface-tint": "#5e5e5e",
+                        "tertiary-fixed-dim": "#474747",
+                        "on-tertiary-container": "#ffffff",
+                        "tertiary": "#3b3b3b",
+                        "surface": "#f9f9f9"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "mono": ["JetBrains Mono"]
+                    },
+                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "0px" },
+                },
             },
-            fontFamily: {
-              "headline": ["Manrope"],
-              "body": ["Inter"],
-              "label": ["Inter"],
-              "mono": ["JetBrains Mono"]
-            },
-            borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "0px"},
-          },
-        },
-      }
+        }
     </script>
-<style>
+    <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
             vertical-align: middle;
         }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f9f9f9;
             color: #1a1c1c;
         }
-        h1, h2, h3 {
+
+        h1,
+        h2,
+        h3 {
             font-family: 'Manrope', sans-serif;
         }
+
         .mono-text {
             font-family: 'JetBrains Mono', monospace;
         }
-        /* Scroll Reveal Animations */
+
+        /* ── Scroll Progress Bar ── */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: #000;
+            width: 0%;
+            z-index: 9999;
+            transition: width 0.1s linear;
+        }
+
+        /* ── Base reveal states ── */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(48px);
+            transition: opacity 0.75s cubic-bezier(.16,1,.3,1), transform 0.75s cubic-bezier(.16,1,.3,1);
         }
-        .reveal.active {
+        .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: opacity 0.75s cubic-bezier(.16,1,.3,1), transform 0.75s cubic-bezier(.16,1,.3,1);
+        }
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.75s cubic-bezier(.16,1,.3,1), transform 0.75s cubic-bezier(.16,1,.3,1);
+        }
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.88);
+            transition: opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1);
+        }
+        .reveal-scale.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* stagger delays */
+        .delay-1 { transition-delay: 0.08s; }
+        .delay-2 { transition-delay: 0.16s; }
+        .delay-3 { transition-delay: 0.24s; }
+        .delay-4 { transition-delay: 0.32s; }
+        .delay-5 { transition-delay: 0.40s; }
+        .delay-6 { transition-delay: 0.48s; }
+
+        /* ── Hero word-by-word split ── */
+        .hero-word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(40px) rotate(3deg);
+            transition: opacity 0.55s cubic-bezier(.16,1,.3,1), transform 0.55s cubic-bezier(.16,1,.3,1);
+        }
+        .hero-word.visible {
+            opacity: 1;
+            transform: translateY(0) rotate(0deg);
+        }
+
+        /* ── Animated score counter ── */
+        .score-num {
+            display: inline-block;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ── Score card glitch-in ── */
+        @keyframes scoreReveal {
+            0%   { opacity: 0; transform: translateX(-20px) skewX(-8deg); }
+            60%  { opacity: 1; transform: translateX(4px) skewX(2deg); }
+            100% { opacity: 1; transform: translateX(0) skewX(0); }
+        }
+        .score-card {
+            opacity: 0;
+        }
+        .score-card.visible {
+            animation: scoreReveal 0.65s cubic-bezier(.16,1,.3,1) forwards;
+        }
+
+        /* ── Feature card hover lift ── */
+        .feature-card {
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+
+        /* ── Finding item slide ── */
+        .finding-item {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s cubic-bezier(.16,1,.3,1), transform 0.6s cubic-bezier(.16,1,.3,1), background 0.2s;
+        }
+        .finding-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .finding-item:hover {
+            background: #e8e8e8;
+        }
+
+        /* ── Pricing card spotlight ── */
+        .price-card {
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            transition: opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1);
+        }
+        .price-card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* ── CTA section text glitch ── */
+        @keyframes glitchIn {
+            0%   { clip-path: inset(0 100% 0 0); }
+            100% { clip-path: inset(0 0% 0 0); }
+        }
+        .cta-reveal {
+            opacity: 0;
+        }
+        .cta-reveal.visible {
+            opacity: 1;
+            animation: glitchIn 0.8s cubic-bezier(.16,1,.3,1) forwards;
+        }
+
+        /* ── Marquee scan line on hero card ── */
+        @keyframes scanLine {
+            0%   { top: 0; opacity: 0.6; }
+            100% { top: 100%; opacity: 0; }
+        }
+        .scan-line {
+            position: absolute;
+            left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.25), transparent);
+            animation: scanLine 2.5s linear infinite;
+            pointer-events: none;
+        }
+
+        /* ── Nav blur on scroll ── */
+        nav {
+            transition: backdrop-filter 0.3s, background 0.3s, box-shadow 0.3s;
+        }
+        nav.scrolled {
+            background: rgba(255,255,255,0.85) !important;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+        }
     </style>
 </head>
+
 <body class="bg-background text-on-background">
-<!-- TopNavBar -->
-<nav class="bg-white dark:bg-black flex justify-between items-center w-full px-8 py-4 max-w-full mx-auto fixed top-0 z-50">
-<div class="text-xl font-bold tracking-tighter text-black dark:text-white">AuditAI</div>
-<div class="hidden md:flex gap-8 items-center">
-<a class="font-manrope text-sm font-medium tracking-tight text-black dark:text-white border-b-2 border-black dark:border-white pb-1 hover:opacity-90 transition-opacity" href="#">Features</a>
-<a class="font-manrope text-sm font-medium tracking-tight text-neutral-500 dark:text-neutral-400 pb-1 hover:opacity-90 transition-opacity" href="#">Pricing</a>
-<a class="font-manrope text-sm font-medium tracking-tight text-neutral-500 dark:text-neutral-400 pb-1 hover:opacity-90 transition-opacity" href="#">Docs</a>
-</div>
-<button class="bg-primary text-on-primary px-6 py-2 font-manrope text-sm font-medium tracking-tight scale-95 active:scale-90 transition-transform">
-        Get started
-    </button>
-</nav>
-<main class="pt-24">
-<!-- Hero Section -->
-<section class="px-8 py-20 md:py-32 flex flex-col items-center text-center max-w-5xl mx-auto reveal">
-<h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-8">
-            Audit your app in seconds with AI
-        </h1>
-<p class="text-xl md:text-2xl text-on-surface-variant max-w-2xl mb-12">
-            Get a full report on performance, security, and accessibility. The definitive platform for modern software quality assurance.
-        </p>
-<div class="flex flex-col md:flex-row gap-4">
-<button id="hero-audit-button" class="bg-primary text-on-primary px-10 py-4 font-bold text-lg hover:opacity-90 transition-opacity">
-                Audit your app
-            </button>
-<button class="border border-primary text-primary px-10 py-4 font-bold text-lg hover:bg-surface-container-low transition-colors">
-                See a sample report
-            </button>
-</div>
-</section>
-<!-- Audit Result Card (Sample UI) -->
-<section class="px-8 pb-32 reveal">
-<div class="max-w-6xl mx-auto bg-surface-container border border-outline-variant p-1">
-<div class="bg-surface-container-lowest p-8 md:p-12">
-<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 border-b border-surface-container pb-8">
-<div>
-<span class="mono-text text-xs text-on-surface-variant uppercase tracking-widest block mb-2">Report ID: #AUD-X92-2024</span>
-<h2 class="text-3xl font-bold tracking-tight">Audit report summary</h2>
-</div>
-<div class="mt-4 md:mt-0">
-<span class="bg-primary text-on-primary px-3 py-1 text-xs mono-text font-bold">LIVE STATUS: SCAN COMPLETE</span>
-</div>
-</div>
-<!-- Score Grid -->
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-<div class="bg-surface-container-low p-6 border-l-4 border-green-500">
-<p class="text-xs font-medium text-on-surface-variant mb-2">Performance</p>
-<p class="text-4xl font-extrabold text-green-600">98</p>
-</div>
-<div class="bg-surface-container-low p-6 border-l-4 border-[#ba1a1a]">
-<p class="text-xs font-medium text-on-surface-variant mb-2">Security</p>
-<p class="text-4xl font-extrabold text-[#ba1a1a]">72</p>
-</div>
-<div class="bg-surface-container-low p-6 border-l-4 border-green-500">
-<p class="text-xs font-medium text-on-surface-variant mb-2">Accessibility</p>
-<p class="text-4xl font-extrabold text-green-600">91</p>
-</div>
-<div class="bg-surface-container-low p-6 border-l-4 border-amber-500">
-<p class="text-xs font-medium text-on-surface-variant mb-2">AI Behavior</p>
-<p class="text-4xl font-extrabold text-amber-600">85</p>
-</div>
-</div>
-<!-- Findings List -->
-<div>
-<h3 class="text-xl font-bold mb-6">Critical findings</h3>
-<div class="space-y-4">
-<div class="bg-surface-container-low p-4 flex items-center justify-between">
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-error" data-icon="warning" data-weight="fill" style="font-variation-settings: 'FILL' 1;">warning</span>
-<div>
-<p class="font-bold text-sm">Expired SSL certificate found on sub-domain</p>
-<p class="text-xs mono-text text-on-surface-variant">api.audit-ai.dev/v1/auth</p>
-</div>
-</div>
-<span class="bg-error-container text-on-error-container px-3 py-1 text-xs font-bold">High</span>
-</div>
-<div class="bg-surface-container-low p-4 flex items-center justify-between">
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-amber-600" data-icon="error_outline">error_outline</span>
-<div>
-<p class="font-bold text-sm">Missing ARIA labels on main navigation links</p>
-<p class="text-xs mono-text text-on-surface-variant">/components/Header.tsx:42</p>
-</div>
-</div>
-<span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 text-xs font-bold">Medium</span>
-</div>
-<div class="bg-surface-container-low p-4 flex items-center justify-between">
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-on-surface-variant" data-icon="info">info</span>
-<div>
-<p class="font-bold text-sm">Non-critical font loading delay observed</p>
-<p class="text-xs mono-text text-on-surface-variant">LCP optimization suggested</p>
-</div>
-</div>
-<span class="bg-surface-container-highest text-on-surface-variant px-3 py-1 text-xs font-bold">Low</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Features Grid -->
-<section class="bg-surface-container px-8 py-32 reveal">
-<div class="max-w-6xl mx-auto">
-<h2 class="text-4xl font-bold mb-16 max-w-xl">Intelligent auditing for the high-stakes web</h2>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="bg-surface-container-lowest p-8 border-l-4 border-primary">
-<span class="material-symbols-outlined text-3xl mb-6" data-icon="security">security</span>
-<h3 class="text-lg font-bold mb-2">Automated pen-testing</h3>
-<p class="text-on-surface-variant text-sm leading-relaxed">Continuous security scanning that identifies vulnerabilities before they are exploited.</p>
-</div>
-<div class="bg-surface-container-lowest p-8 border-l-4 border-primary">
-<span class="material-symbols-outlined text-3xl mb-6" data-icon="speed">speed</span>
-<h3 class="text-lg font-bold mb-2">Vitals benchmarking</h3>
-<p class="text-on-surface-variant text-sm leading-relaxed">Deep analysis of Core Web Vitals with specific machine-learned remediation steps.</p>
-</div>
-<div class="bg-surface-container-lowest p-8 border-l-4 border-primary">
-<span class="material-symbols-outlined text-3xl mb-6" data-icon="accessibility_new">accessibility_new</span>
-<h3 class="text-lg font-bold mb-2">WCAG compliance</h3>
-<p class="text-on-surface-variant text-sm leading-relaxed">Automated accessibility checking against global standards with visual heatmaps.</p>
-</div>
-<div class="bg-surface-container-lowest p-8 border-l-4 border-primary">
-<span class="material-symbols-outlined text-3xl mb-6" data-icon="psychology">psychology</span>
-<h3 class="text-lg font-bold mb-2">AI behavior check</h3>
-<p class="text-on-surface-variant text-sm leading-relaxed">Evaluates your AI integrations for prompt injection risks and response latency.</p>
-</div>
-<div class="bg-surface-container-lowest p-8 border-l-4 border-primary">
-<span class="material-symbols-outlined text-3xl mb-6" data-icon="terminal">terminal</span>
-<h3 class="text-lg font-bold mb-2">CI/CD integration</h3>
-<p class="text-on-surface-variant text-sm leading-relaxed">Trigger audits on every push with our lightweight CLI and GitHub Action.</p>
-</div>
-<div class="bg-surface-container-lowest p-8 border-l-4 border-primary">
-<span class="material-symbols-outlined text-3xl mb-6" data-icon="description">description</span>
-<h3 class="text-lg font-bold mb-2">Editorial reports</h3>
-<p class="text-on-surface-variant text-sm leading-relaxed">Export beautiful, printable PDF reports designed for executive stakeholders.</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Pricing Table -->
-<section class="px-8 py-32 max-w-6xl mx-auto reveal">
-<div class="text-center mb-16">
-<h2 class="text-4xl font-bold mb-4">Pricing for scale</h2>
-<p class="text-on-surface-variant">Simple, predictable pricing for teams of all sizes.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-outline-variant border border-outline-variant">
-<!-- Free Plan -->
-<div class="bg-surface-container-lowest p-10 flex flex-col">
-<h3 class="text-xl font-bold mb-2">Free</h3>
-<p class="text-3xl font-extrabold mb-6">$0 <span class="text-sm font-normal text-on-surface-variant">/mo</span></p>
-<ul class="space-y-4 mb-10 flex-grow">
-<li class="flex items-center gap-2 text-sm">
-<span class="material-symbols-outlined text-green-600 text-lg" data-icon="check">check</span>
-                        5 audits per month
-                    </li>
-<li class="flex items-center gap-2 text-sm">
-<span class="material-symbols-outlined text-green-600 text-lg" data-icon="check">check</span>
-                        Core vitals check
-                    </li>
-<li class="flex items-center gap-2 text-sm">
-<span class="material-symbols-outlined text-green-600 text-lg" data-icon="check">check</span>
-                        Community support
-                    </li>
-</ul>
-<button class="border border-primary py-3 font-bold hover:bg-surface-container-low transition-colors">Select plan</button>
-</div>
-<!-- Pro Plan -->
-<div class="bg-surface-container-lowest p-10 flex flex-col relative overflow-hidden ring-4 ring-primary z-10">
-<div class="absolute top-4 right-[-40px] bg-primary text-on-primary text-[10px] font-bold px-12 py-1 rotate-45">POPULAR</div>
-<h3 class="text-xl font-bold mb-2">Pro</h3>
-<p class="text-3xl font-extrabold mb-6">$49 <span class="text-sm font-normal text-on-surface-variant">/mo</span></p>
-<ul class="space-y-4 mb-10 flex-grow">
-<li class="flex items-center gap-2 text-sm">
-<span class="material-symbols-outlined text-green-600 text-lg" data-icon="check">check</span>
-                        Unlimited audits
-                    </li>
-<li class="flex items-center gap-2 text-sm">
-<span class="material-symbols-outlined text-green-600 text-lg" data-icon="check">check</span>
-                        Full security suite
-                    </li>
-<li class="flex items-center gap-2 text-sm">
-<span class="material-symbols-outlined text-green-600 text-lg" data-icon="check">check</span>
-                        AI behavior testing
-                    </li>
-<li class="flex items-center gap-2 text-sm">
-<span class="material-symbols-outlined text-green-600 text-lg" data-icon="check">check</span>
-                        CI/CD integration
-                    </li>
-</ul>
-<button class="bg-primary text-on-primary py-3 font-bold hover:opacity-90 transition-opacity">Select plan</button>
-</div>
-<!-- Enterprise Plan -->
-<div class="bg-surface-container-lowest p-10 flex flex-col">
-<h3 class="text-xl font-bold mb-2">Enterprise</h3>
-<p class="text-3xl font-extrabold mb-6">Custom</p>
-<ul class="space-y-4 mb-10 flex-grow">
-<li class="flex items-center gap-2 text-sm">
-<span class="material-symbols-outlined text-green-600 text-lg" data-icon="check">check</span>
-                        Custom reporting engine
-                    </li>
-<li class="flex items-center gap-2 text-sm">
-<span class="material-symbols-outlined text-green-600 text-lg" data-icon="check">check</span>
-                        SSO &amp; SAML
-                    </li>
-<li class="flex items-center gap-2 text-sm">
-<span class="material-symbols-outlined text-green-600 text-lg" data-icon="check">check</span>
-                        Dedicated audit engineer
-                    </li>
-</ul>
-<button class="border border-primary py-3 font-bold hover:bg-surface-container-low transition-colors">Contact sales</button>
-</div>
-</div>
-</section>
-<!-- CTA Section -->
-<section class="bg-primary text-on-primary px-8 py-24 text-center reveal">
-<h2 class="text-4xl font-bold mb-8">Ready to secure your stack?</h2>
-<p class="mb-12 text-on-primary-fixed-variant max-w-xl mx-auto">Start auditing today. No credit card required for the free tier.</p>
-<div class="max-w-md mx-auto flex">
-<input id="cta-email" class="bg-surface-container-lowest border-none px-6 py-4 flex-grow text-primary placeholder:text-outline outline-none" placeholder="Enter your work email" type="email"/>
-<button id="cta-audit-button" class="bg-tertiary text-on-tertiary px-8 font-bold">Audit</button>
-</div>
-</section>
-<!-- Inquiry Section -->
-<section class="bg-background px-8 py-32 border-t border-outline-variant reveal">
-<div class="max-w-4xl mx-auto text-center">
-<h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-6">Submit your inquiry</h2>
-<p class="text-lg text-on-surface-variant max-w-2xl mx-auto mb-12">
-                Join the exclusive inquiry queue to get early access to AuditAI. Automate your compliance, security, and performance reviews with precision.
+    <div id="scroll-progress"></div>
+    <!-- TopNavBar -->
+    <nav
+        class="bg-white dark:bg-black flex justify-between items-center w-full px-8 py-4 max-w-full mx-auto fixed top-0 z-50">
+        <div class="text-xl font-bold tracking-tighter text-black dark:text-white">AuditAI</div>
+        <div class="hidden md:flex gap-8 items-center">
+            <a class="font-manrope text-sm font-medium tracking-tight text-black dark:text-white border-b-2 border-black dark:border-white pb-1 hover:opacity-90 transition-opacity"
+                href="#">Features</a>
+            <a class="font-manrope text-sm font-medium tracking-tight text-neutral-500 dark:text-neutral-400 pb-1 hover:opacity-90 transition-opacity"
+                href="#">Pricing</a>
+            <a class="font-manrope text-sm font-medium tracking-tight text-neutral-500 dark:text-neutral-400 pb-1 hover:opacity-90 transition-opacity"
+                href="#">Docs</a>
+        </div>
+        <button
+            class="bg-primary text-on-primary px-6 py-2 font-manrope text-sm font-medium tracking-tight scale-95 active:scale-90 transition-transform">
+            Get started
+        </button>
+    </nav>
+    <main class="pt-24">
+        <!-- Hero Section -->
+        <section class="px-8 py-20 md:py-32 flex flex-col items-center text-center max-w-5xl mx-auto">
+            <h1 id="hero-heading" class="text-5xl md:text-7xl font-extrabold tracking-tight mb-8"></h1>
+            <p class="reveal text-xl md:text-2xl text-on-surface-variant max-w-2xl mb-12 delay-3">
+                Get a full report on performance, security, and accessibility. The definitive platform for modern
+                software quality assurance.
             </p>
-<div class="max-w-md mx-auto flex border border-primary p-1 bg-white">
-<input id="waitlist-email" class="flex-grow px-6 py-4 text-primary bg-white placeholder:text-outline outline-none text-sm" placeholder="your@email.com" type="email"/>
-<button id="waitlist-button" class="bg-primary text-on-primary px-8 py-4 font-bold text-sm hover:opacity-90 transition-opacity whitespace-nowrap">
-                    Submit Inquiry
+            <div class="reveal flex flex-col md:flex-row gap-4 delay-5">
+                <button id="hero-audit-button"
+                    class="bg-primary text-on-primary px-10 py-4 font-bold text-lg hover:opacity-90 transition-opacity">
+                    Audit your app
                 </button>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="bg-neutral-50 dark:bg-neutral-950 flex flex-col md:flex-row justify-between items-center w-full px-8 py-12 border-t border-neutral-200 dark:border-neutral-800">
-<div class="mb-8 md:mb-0">
-<div class="text-lg font-bold text-black dark:text-white mb-2">AuditAI</div>
-<p class="font-inter text-xs text-neutral-500 dark:text-neutral-400">© 2024 AuditAI. The Digital Jurist.</p>
-</div>
-<div class="flex gap-8">
-<a class="font-inter text-xs text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors opacity-80 hover:opacity-100" href="#">Privacy</a>
-<a class="font-inter text-xs text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors opacity-80 hover:opacity-100" href="#">Terms</a>
-<a class="font-inter text-xs text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors opacity-80 hover:opacity-100" href="#">Security</a>
-<a class="font-inter text-xs text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors opacity-80 hover:opacity-100" href="#">Status</a>
-</div>
-</footer>
-<script>
-    // Scroll Reveal Logic
-    const reveal = () => {
-        const reveals = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    // Once revealed, no need to observe anymore
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.1, // Trigger when 10% of the section is visible
-            rootMargin: '0px 0px -50px 0px' 
+                <button
+                    class="border border-primary text-primary px-10 py-4 font-bold text-lg hover:bg-surface-container-low transition-colors">
+                    See a sample report
+                </button>
+            </div>
+        </section>
+        <!-- Audit Result Card (Sample UI) -->
+        <section class="px-8 pb-32">
+            <div class="reveal max-w-6xl mx-auto bg-surface-container border border-outline-variant p-1">
+                <div class="relative overflow-hidden bg-surface-container-lowest p-8 md:p-12">
+                    <div class="scan-line"></div>
+                    <div
+                        class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 border-b border-surface-container pb-8">
+                        <div>
+                            <span
+                                class="mono-text text-xs text-on-surface-variant uppercase tracking-widest block mb-2">Report
+                                ID: #AUD-X92-2024</span>
+                            <h2 class="text-3xl font-bold tracking-tight">Audit report summary</h2>
+                        </div>
+                        <div class="mt-4 md:mt-0">
+                            <span class="bg-primary text-on-primary px-3 py-1 text-xs mono-text font-bold">LIVE STATUS:
+                                SCAN COMPLETE</span>
+                        </div>
+                    </div>
+                    <!-- Score Grid -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+                        <div class="score-card delay-1 bg-surface-container-low p-6 border-l-4 border-green-500">
+                            <p class="text-xs font-medium text-on-surface-variant mb-2">Performance</p>
+                            <p class="text-4xl font-extrabold text-green-600"><span class="score-num" data-target="98">0</span></p>
+                        </div>
+                        <div class="score-card delay-2 bg-surface-container-low p-6 border-l-4 border-[#ba1a1a]">
+                            <p class="text-xs font-medium text-on-surface-variant mb-2">Security</p>
+                            <p class="text-4xl font-extrabold text-[#ba1a1a]"><span class="score-num" data-target="72">0</span></p>
+                        </div>
+                        <div class="score-card delay-3 bg-surface-container-low p-6 border-l-4 border-green-500">
+                            <p class="text-xs font-medium text-on-surface-variant mb-2">Accessibility</p>
+                            <p class="text-4xl font-extrabold text-green-600"><span class="score-num" data-target="91">0</span></p>
+                        </div>
+                        <div class="score-card delay-4 bg-surface-container-low p-6 border-l-4 border-amber-500">
+                            <p class="text-xs font-medium text-on-surface-variant mb-2">AI Behavior</p>
+                            <p class="text-4xl font-extrabold text-amber-600"><span class="score-num" data-target="85">0</span></p>
+                        </div>
+                    </div>
+                    <!-- Findings List -->
+                    <div>
+                        <h3 class="reveal text-xl font-bold mb-6">Critical findings</h3>
+                        <div class="space-y-4">
+                            <div class="finding-item delay-1 bg-surface-container-low p-4 flex items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <span class="material-symbols-outlined text-error" data-icon="warning"
+                                        data-weight="fill" style="font-variation-settings: 'FILL' 1;">warning</span>
+                                    <div>
+                                        <p class="font-bold text-sm">Expired SSL certificate found on sub-domain</p>
+                                        <p class="text-xs mono-text text-on-surface-variant">api.audit-ai.dev/v1/auth</p>
+                                    </div>
+                                </div>
+                                <span class="bg-error-container text-on-error-container px-3 py-1 text-xs font-bold">High</span>
+                            </div>
+                            <div class="finding-item delay-2 bg-surface-container-low p-4 flex items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <span class="material-symbols-outlined text-amber-600"
+                                        data-icon="error_outline">error_outline</span>
+                                    <div>
+                                        <p class="font-bold text-sm">Missing ARIA labels on main navigation links</p>
+                                        <p class="text-xs mono-text text-on-surface-variant">/components/Header.tsx:42</p>
+                                    </div>
+                                </div>
+                                <span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 text-xs font-bold">Medium</span>
+                            </div>
+                            <div class="finding-item delay-3 bg-surface-container-low p-4 flex items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <span class="material-symbols-outlined text-on-surface-variant"
+                                        data-icon="info">info</span>
+                                    <div>
+                                        <p class="font-bold text-sm">Non-critical font loading delay observed</p>
+                                        <p class="text-xs mono-text text-on-surface-variant">LCP optimization suggested</p>
+                                    </div>
+                                </div>
+                                <span class="bg-surface-container-highest text-on-surface-variant px-3 py-1 text-xs font-bold">Low</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Features Grid -->
+        <section class="bg-surface-container px-8 py-32">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="reveal text-4xl font-bold mb-16 max-w-xl">Intelligent auditing for the high-stakes web</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="feature-card reveal delay-1 bg-surface-container-lowest p-8 border-l-4 border-primary">
+                        <span class="material-symbols-outlined text-3xl mb-6" data-icon="security">security</span>
+                        <h3 class="text-lg font-bold mb-2">Automated pen-testing</h3>
+                        <p class="text-on-surface-variant text-sm leading-relaxed">Continuous security scanning that
+                            identifies vulnerabilities before they are exploited.</p>
+                    </div>
+                    <div class="feature-card reveal delay-2 bg-surface-container-lowest p-8 border-l-4 border-primary">
+                        <span class="material-symbols-outlined text-3xl mb-6" data-icon="speed">speed</span>
+                        <h3 class="text-lg font-bold mb-2">Vitals benchmarking</h3>
+                        <p class="text-on-surface-variant text-sm leading-relaxed">Deep analysis of Core Web Vitals with
+                            specific machine-learned remediation steps.</p>
+                    </div>
+                    <div class="feature-card reveal delay-3 bg-surface-container-lowest p-8 border-l-4 border-primary">
+                        <span class="material-symbols-outlined text-3xl mb-6"
+                            data-icon="accessibility_new">accessibility_new</span>
+                        <h3 class="text-lg font-bold mb-2">WCAG compliance</h3>
+                        <p class="text-on-surface-variant text-sm leading-relaxed">Automated accessibility checking
+                            against global standards with visual heatmaps.</p>
+                    </div>
+                    <div class="feature-card reveal delay-4 bg-surface-container-lowest p-8 border-l-4 border-primary">
+                        <span class="material-symbols-outlined text-3xl mb-6" data-icon="psychology">psychology</span>
+                        <h3 class="text-lg font-bold mb-2">AI behavior check</h3>
+                        <p class="text-on-surface-variant text-sm leading-relaxed">Evaluates your AI integrations for
+                            prompt injection risks and response latency.</p>
+                    </div>
+                    <div class="feature-card reveal delay-5 bg-surface-container-lowest p-8 border-l-4 border-primary">
+                        <span class="material-symbols-outlined text-3xl mb-6" data-icon="terminal">terminal</span>
+                        <h3 class="text-lg font-bold mb-2">CI/CD integration</h3>
+                        <p class="text-on-surface-variant text-sm leading-relaxed">Trigger audits on every push with our
+                            lightweight CLI and GitHub Action.</p>
+                    </div>
+                    <div class="feature-card reveal delay-6 bg-surface-container-lowest p-8 border-l-4 border-primary">
+                        <span class="material-symbols-outlined text-3xl mb-6" data-icon="description">description</span>
+                        <h3 class="text-lg font-bold mb-2">Editorial reports</h3>
+                        <p class="text-on-surface-variant text-sm leading-relaxed">Export beautiful, printable PDF
+                            reports designed for executive stakeholders.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Pricing Table -->
+        <section class="px-8 py-32 max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Pricing for scale</h2>
+                <p class="text-on-surface-variant">Simple, predictable pricing for teams of all sizes.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-outline-variant border border-outline-variant">
+                <!-- Free Plan -->
+                <div class="price-card delay-1 bg-surface-container-lowest p-10 flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">Free</h3>
+                    <p class="text-3xl font-extrabold mb-6">$0 <span
+                            class="text-sm font-normal text-on-surface-variant">/mo</span></p>
+                    <ul class="space-y-4 mb-10 flex-grow">
+                        <li class="flex items-center gap-2 text-sm">
+                            <span class="material-symbols-outlined text-green-600 text-lg"
+                                data-icon="check">check</span>
+                            5 audits per month
+                        </li>
+                        <li class="flex items-center gap-2 text-sm">
+                            <span class="material-symbols-outlined text-green-600 text-lg"
+                                data-icon="check">check</span>
+                            Core vitals check
+                        </li>
+                        <li class="flex items-center gap-2 text-sm">
+                            <span class="material-symbols-outlined text-green-600 text-lg"
+                                data-icon="check">check</span>
+                            Community support
+                        </li>
+                    </ul>
+                    <button
+                        class="border border-primary py-3 font-bold hover:bg-surface-container-low transition-colors">Select
+                        plan</button>
+                </div>
+                <!-- Pro Plan -->
+                <div
+                    class="price-card delay-2 bg-surface-container-lowest p-10 flex flex-col relative overflow-hidden ring-4 ring-primary z-10">
+                    <div
+                        class="absolute top-4 right-[-40px] bg-primary text-on-primary text-[10px] font-bold px-12 py-1 rotate-45">
+                        POPULAR</div>
+                    <h3 class="text-xl font-bold mb-2">Pro</h3>
+                    <p class="text-3xl font-extrabold mb-6">$49 <span
+                            class="text-sm font-normal text-on-surface-variant">/mo</span></p>
+                    <ul class="space-y-4 mb-10 flex-grow">
+                        <li class="flex items-center gap-2 text-sm">
+                            <span class="material-symbols-outlined text-green-600 text-lg"
+                                data-icon="check">check</span>
+                            Unlimited audits
+                        </li>
+                        <li class="flex items-center gap-2 text-sm">
+                            <span class="material-symbols-outlined text-green-600 text-lg"
+                                data-icon="check">check</span>
+                            Full security suite
+                        </li>
+                        <li class="flex items-center gap-2 text-sm">
+                            <span class="material-symbols-outlined text-green-600 text-lg"
+                                data-icon="check">check</span>
+                            AI behavior testing
+                        </li>
+                        <li class="flex items-center gap-2 text-sm">
+                            <span class="material-symbols-outlined text-green-600 text-lg"
+                                data-icon="check">check</span>
+                            CI/CD integration
+                        </li>
+                    </ul>
+                    <button class="bg-primary text-on-primary py-3 font-bold hover:opacity-90 transition-opacity">Select
+                        plan</button>
+                </div>
+                <!-- Enterprise Plan -->
+                <div class="price-card delay-3 bg-surface-container-lowest p-10 flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">Enterprise</h3>
+                    <p class="text-3xl font-extrabold mb-6">Custom</p>
+                    <ul class="space-y-4 mb-10 flex-grow">
+                        <li class="flex items-center gap-2 text-sm">
+                            <span class="material-symbols-outlined text-green-600 text-lg"
+                                data-icon="check">check</span>
+                            Custom reporting engine
+                        </li>
+                        <li class="flex items-center gap-2 text-sm">
+                            <span class="material-symbols-outlined text-green-600 text-lg"
+                                data-icon="check">check</span>
+                            SSO &amp; SAML
+                        </li>
+                        <li class="flex items-center gap-2 text-sm">
+                            <span class="material-symbols-outlined text-green-600 text-lg"
+                                data-icon="check">check</span>
+                            Dedicated audit engineer
+                        </li>
+                    </ul>
+                    <button
+                        class="border border-primary py-3 font-bold hover:bg-surface-container-low transition-colors">Contact
+                        sales</button>
+                </div>
+            </div>
+        </section>
+        <!-- CTA Section -->
+        <section class="bg-primary text-on-primary px-8 py-24 text-center">
+            <h2 class="cta-reveal text-4xl font-bold mb-8">Ready to secure your stack?</h2>
+            <p class="reveal delay-2 mb-12 text-on-primary-fixed-variant max-w-xl mx-auto">Start auditing today. No credit card
+                required for the free tier.</p>
+            <div class="max-w-md mx-auto flex">
+                <input id="cta-email"
+                    class="bg-surface-container-lowest border-none px-6 py-4 flex-grow text-primary placeholder:text-outline outline-none"
+                    placeholder="Enter your work email" type="email" />
+                <button id="cta-audit-button" class="bg-tertiary text-on-tertiary px-8 font-bold">Audit</button>
+            </div>
+        </section>
+        <!-- Waitlist Section -->
+        <section class="bg-background px-8 py-32 border-t border-outline-variant">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-6">Submit your inquiry</h2>
+                <p class="text-lg text-on-surface-variant max-w-2xl mx-auto mb-12">
+                    Join the exclusive inquiry queue to get early access to AuditAI. Automate your compliance, security,
+                    and performance reviews with precision.
+                </p>
+                <div class="max-w-md mx-auto flex border border-primary p-1 bg-white">
+                    <input id="waitlist-email"
+                        class="flex-grow px-6 py-4 text-primary bg-white placeholder:text-outline outline-none text-sm"
+                        placeholder="your@email.com" type="email" />
+                    <button id="waitlist-button"
+                        class="bg-primary text-on-primary px-8 py-4 font-bold text-sm hover:opacity-90 transition-opacity whitespace-nowrap">
+                        Submit Inquiry
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer
+        class="bg-neutral-50 dark:bg-neutral-950 flex flex-col md:flex-row justify-between items-center w-full px-8 py-12 border-t border-neutral-200 dark:border-neutral-800">
+        <div class="mb-8 md:mb-0">
+            <div class="text-lg font-bold text-black dark:text-white mb-2">AuditAI</div>
+            <p class="font-inter text-xs text-neutral-500 dark:text-neutral-400">© 2024 AuditAI. The Digital Jurist.</p>
+        </div>
+        <div class="flex gap-8">
+            <a class="font-inter text-xs text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors opacity-80 hover:opacity-100"
+                href="#">Privacy</a>
+            <a class="font-inter text-xs text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors opacity-80 hover:opacity-100"
+                href="#">Terms</a>
+            <a class="font-inter text-xs text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors opacity-80 hover:opacity-100"
+                href="#">Security</a>
+            <a class="font-inter text-xs text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors opacity-80 hover:opacity-100"
+                href="#">Status</a>
+        </div>
+    </footer>
+    <script>
+        // Supabase Configuration
+        // REPLACE THESE WITH YOUR OWN SUPABASE PROJECT VALUES
+        const SUPABASE_URL = 'https://fcfwamqmzhvopjoisomj.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjZndhbXFtemh2b3Bqb2lzb21qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2NTQyOTYsImV4cCI6MjA4OTIzMDI5Nn0.aESGtn6uFLrSuNeGKoUURdwVxK7PDRMn0VH38H-F4iw';
+
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Feedback Toast (Simple CSS-based notification)
+        const showToast = (message, isError = false) => {
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-8 right-8 px-6 py-4 font-bold text-sm z-50 transition-all duration-300 transform translate-y-12 opacity-0`;
+            toast.style.backgroundColor = isError ? '#ba1a1a' : '#000000';
+            toast.style.color = '#ffffff';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            // Animate in
+            setTimeout(() => {
+                toast.classList.remove('translate-y-12', 'opacity-0');
+            }, 10);
+
+            // Animate out
+            setTimeout(() => {
+                toast.classList.add('translate-y-12', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        };
+
+        // Form Handling Logic
+        async function handleSubmission(emailInput, button, source) {
+            const email = emailInput.value;
+            if (!email || !email.includes('@')) {
+                showToast('Please enter a valid work email.', true);
+                return;
+            }
+
+            const originalText = button.textContent;
+            button.disabled = true;
+            button.textContent = 'Processing...';
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('waitlist')
+                    .insert([{ email: email, source: source, created_at: new Date() }]);
+
+                if (error) throw error;
+
+                showToast('Success! Your inquiry has been recorded.');
+                emailInput.value = '';
+                return true;
+            } catch (error) {
+                console.error('Error submitting to Supabase:', error.message);
+                showToast('Submission error. Please try again later.', true);
+                return false;
+            } finally {
+                button.disabled = false;
+                button.textContent = originalText;
+            }
+        }
+
+        // Event Listeners
+        document.getElementById('cta-audit-button')?.addEventListener('click', async () => {
+            await handleSubmission(
+                document.getElementById('cta-email'),
+                document.getElementById('cta-audit-button'),
+                'cta_audit'
+            );
         });
 
-        reveals.forEach(el => observer.observe(el));
-    };
+        document.getElementById('waitlist-button')?.addEventListener('click', async () => {
+            await handleSubmission(
+                document.getElementById('waitlist-email'),
+                document.getElementById('waitlist-button'),
+                'inquiry'
+            );
+        });
 
-    // Initialize Animations
-    document.addEventListener('DOMContentLoaded', reveal);
-    
-    // Supabase Configuration
-    // REPLACE THESE WITH YOUR OWN SUPABASE PROJECT VALUES
-    const SUPABASE_URL = 'https://fcfwamqmzhvopjoisomj.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjZndhbXFtemh2b3Bqb2lzb21qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2NTQyOTYsImV4cCI6MjA4OTIzMDI5Nn0.aESGtn6uFLrSuNeGKoUURdwVxK7PDRMn0VH38H-F4iw';
+        document.getElementById('hero-audit-button')?.addEventListener('click', () => {
+            const ctaEmail = document.getElementById('cta-email');
+            if (ctaEmail) {
+                ctaEmail.scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => ctaEmail.focus(), 800);
+            }
+        });
 
-    const { createClient } = supabase;
-    const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // ── Scroll Progress Bar ──
+        const progressBar = document.getElementById('scroll-progress');
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+            progressBar.style.width = (scrolled * 100) + '%';
+        }, { passive: true });
 
-    // Feedback Toast (Simple CSS-based notification)
-    const showToast = (message, isError = false) => {
-        const toast = document.createElement('div');
-        toast.className = `fixed bottom-8 right-8 px-6 py-4 font-bold text-sm z-50 transition-all duration-300 transform translate-y-12 opacity-0`;
-        toast.style.backgroundColor = isError ? '#ba1a1a' : '#000000';
-        toast.style.color = '#ffffff';
-        toast.textContent = message;
-        document.body.appendChild(toast);
+        // ── Nav blur on scroll ──
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 20);
+        }, { passive: true });
 
-        // Animate in
-        setTimeout(() => {
-            toast.classList.remove('translate-y-12', 'opacity-0');
-        }, 10);
+        // ── Hero word-by-word animation ──
+        const heroText = "Audit your app in seconds with AI";
+        const heroEl = document.getElementById('hero-heading');
+        heroEl.innerHTML = heroText.split(' ').map((w, i) =>
+            `<span class="hero-word" style="transition-delay:${i * 0.07 + 0.1}s">${w}&nbsp;</span>`
+        ).join('');
+        // Trigger immediately (hero is always visible on load)
+        requestAnimationFrame(() => {
+            heroEl.querySelectorAll('.hero-word').forEach(w => w.classList.add('visible'));
+        });
 
-        // Animate out
-        setTimeout(() => {
-            toast.classList.add('translate-y-12', 'opacity-0');
-            setTimeout(() => toast.remove(), 300);
-        }, 3000);
-    };
+        // ── Intersection Observer for scroll reveals ──
+        const observerOpts = { threshold: 0.12, rootMargin: '0px 0px -40px 0px' };
 
-    // Form Handling Logic
-    async function handleSubmission(emailInput, button, source) {
-        const email = emailInput.value;
-        if (!email || !email.includes('@')) {
-            showToast('Please enter a valid work email.', true);
-            return;
-        }
-
-        const originalText = button.textContent;
-        button.disabled = true;
-        button.textContent = 'Processing...';
-
-        try {
-            const { data, error } = await supabaseClient
-                .from('waitlist')
-                .insert([{ email: email, source: source, created_at: new Date() }]);
-
-            if (error) throw error;
-
-            showToast('Success! Your inquiry has been recorded.');
-            emailInput.value = '';
-            return true;
-        } catch (error) {
-            console.error('Error submitting to Supabase:', error.message);
-            showToast('Submission error. Please try again later.', true);
-            return false;
-        } finally {
-            button.disabled = false;
-            button.textContent = originalText;
-        }
-    }
-
-    // Event Listeners
-    document.getElementById('cta-audit-button')?.addEventListener('click', async () => {
-        await handleSubmission(
-            document.getElementById('cta-email'),
-            document.getElementById('cta-audit-button'),
-            'cta_audit'
-        );
-    });
-
-    document.getElementById('waitlist-button')?.addEventListener('click', async () => {
-        await handleSubmission(
-            document.getElementById('waitlist-email'),
-            document.getElementById('waitlist-button'),
-            'inquiry'
-        );
-    });
-
-    document.getElementById('hero-audit-button')?.addEventListener('click', () => {
-        const ctaEmail = document.getElementById('cta-email');
-        if (ctaEmail) {
-            ctaEmail.scrollIntoView({ behavior: 'smooth' });
-            setTimeout(() => ctaEmail.focus(), 800);
-        }
-    });
-
-    // Plan Buttons - Interaction
-    document.querySelectorAll('button').forEach(btn => {
-        if (btn.textContent.includes('Select plan') || btn.textContent.includes('Contact sales')) {
-            btn.addEventListener('click', () => {
-                showToast('Plan selection is currently in preview mode.');
-                document.getElementById('waitlist-email')?.scrollIntoView({ behavior: 'smooth' });
-                setTimeout(() => document.getElementById('waitlist-email')?.focus(), 800);
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    revealObserver.unobserve(e.target);
+                }
             });
-        }
-    });
-</script>
-</body></html>
+        }, observerOpts);
+
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .cta-reveal').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // ── Score card glitch-in with counter ──
+        const scoreObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    const numEl = e.target.querySelector('.score-num');
+                    if (numEl) {
+                        const target = parseInt(numEl.dataset.target, 10);
+                        const delay = parseFloat(getComputedStyle(e.target).transitionDelay) * 1000 || 0;
+                        setTimeout(() => {
+                            let start = 0;
+                            const duration = 900;
+                            const step = (timestamp) => {
+                                if (!start) start = timestamp;
+                                const progress = Math.min((timestamp - start) / duration, 1);
+                                numEl.textContent = Math.floor(progress * target);
+                                if (progress < 1) requestAnimationFrame(step);
+                                else numEl.textContent = target;
+                            };
+                            requestAnimationFrame(step);
+                        }, delay + 200);
+                    }
+                    scoreObserver.unobserve(e.target);
+                }
+            });
+        }, observerOpts);
+
+        document.querySelectorAll('.score-card').forEach(el => scoreObserver.observe(el));
+
+        // ── Finding items observer ──
+        const findingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    findingObserver.unobserve(e.target);
+                }
+            });
+        }, observerOpts);
+
+        document.querySelectorAll('.finding-item').forEach(el => findingObserver.observe(el));
+
+        // ── Pricing cards observer ──
+        const priceObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    priceObserver.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+
+        document.querySelectorAll('.price-card').forEach(el => priceObserver.observe(el));
+
+        // Plan Buttons - Interaction
+        document.querySelectorAll('button').forEach(btn => {
+            if (btn.textContent.includes('Select plan') || btn.textContent.includes('Contact sales')) {
+                btn.addEventListener('click', () => {
+                    showToast('Plan selection is currently in preview mode.');
+                    document.getElementById('waitlist-email')?.scrollIntoView({ behavior: 'smooth' });
+                    setTimeout(() => document.getElementById('waitlist-email')?.focus(), 800);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
